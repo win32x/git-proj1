@@ -2,11 +2,12 @@ import requests
 from pprint import pprint as p
 
 # https://yobit.net/api/3/depth/esp_eth
+#https://api.livecoin.net/exchange/order_book?currencyPair={}
 
 a = lambda x: sum(float(i[1]) for i in requests.get('https://api.livecoin.net/exchange/order_book?currencyPair={}'.format(x)).json()['asks'])
 y = (input('введите необходимую крипту\n')).upper()
 x = y+'/USD'
-orders = requests.get('https://api.livecoin.net/exchange/order_book?currencyPair={}'.format(x)).json()
+orders = requests.get('https://yobit.net/api/3/depth/{}'.format(x)).json()
 p(x)
 print(orders['asks'][0][0])
 print(orders['bids'][0][0])
